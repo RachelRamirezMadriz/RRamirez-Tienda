@@ -95,7 +95,7 @@
                                             <th>[[#{producto.imagen}]]</th>
                                             <th>[[#{producto.categoria}]]</th>
                                             <th>[[#{producto.activo}]]</th>
-                                            <th></th>
+                                            <th sec:authorize="hasRole('ROLE_ADMIN')"></th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -106,9 +106,9 @@
                                             <td class="text-center">[[${p.existencias}]]</td>
                                             <td class="text-end">[[${#numbers.formatCurrency(p.precio*p.existencias)}]]</td>
                                             <td><img th:src="@{${p.rutaImagen}}" alt="noData" height="75"/></td>
-                                            <td>[[${p.categoria.descripcion.idCategoria}]]</td>
+                                            <td>[[${p.categoria.idCategoria}]]</td>
                                             <td th:text="${p.activo} ? 'Activa':'Inactiva'"></td>
-                                            <td>
+                                            <td sec:authorize="hasRole('ROLE_ADMIN')"><div class='d-flex align-items-start'></div>
                                                 <button type="button" class="btn btn-danger"
                                                         data-bs-toggle="modal" data-bs-target="#confirmModal"
                                                         th:data-bs-id="${p.idProducto}"

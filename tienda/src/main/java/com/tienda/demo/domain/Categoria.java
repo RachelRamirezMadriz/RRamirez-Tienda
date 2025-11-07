@@ -32,7 +32,7 @@ public class Categoria implements Serializable {
         // Relación de uno a muchos con la clase Producto
     // Sin "cascade" ni "orphanRemoval" para evitar la propagación de operaciones.
     @OneToMany(mappedBy = "categoria")
-    private List<Producto> Productos;
+    private List<Producto> productos;
 
     
 }

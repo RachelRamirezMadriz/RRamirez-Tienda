@@ -70,7 +70,7 @@
                 <div th:replace="~{consultas/fragmentos :: formularioConsulta('/consultas/consultaDerivada', #{pruebas.ampliadas}, 'primary')}"></div>
                 <div th:replace="~{consultas/fragmentos :: formularioConsulta('/consultas/consultaJPQL', #{pruebas.jpql}, 'warning')}"></div>
                 <div th:replace="~{consultas/fragmentos :: formularioConsulta('/consultas/consultaSQL', #{pruebas.nativo}, 'success')}"></div>
-                <div><div class="card">Acá va su consulta de la tarea #2</div></div>
+                <div th:replace="~{consultas/fragmentos :: formularioConsultaCategoria('/consultas/consultaPorCategoria', 'Consulta por Categoría', 'success')}"></div>
             </div>
         </section>
 
@@ -95,6 +95,42 @@
                             <i class="fa-solid fa-magnifying-glass"></i> [[${headerText}]]
                         </button>
                     </div>
+                </div>
+            </form>
+        </div>
+        
+        <div th:fragment="formularioConsultaCategoria(actionUrl, headerText, buttonColor)">
+            <form method="post" th:action="@{${actionUrl}}" class="was-validated">
+                <div class="card p-2">
+
+                    <!-- Encabezado rojo dinámico -->
+                    <div class="card-header text-center text-white"
+                         th:classappend="' bg-' + ${buttonColor}">
+                        <h5>[[${headerText}]]</h5>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label for="categoriaSelect">Selecciona una categoría:</label>
+                            <select name="idCategoria" id="categoriaSelect" class="form-select" required>
+                                <option value="">-- Selecciona --</option>
+                                <option th:each="c : ${categorias}" 
+                                        th:value="${c.idCategoria}" 
+                                        th:text="${c.descripcion}"
+                                        th:selected="${idSeleccionado == c.idCategoria}">
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Botón rojo con hover -->
+                    <div class="card-footer text-center">
+                        <button type="submit" class="btn text-white"
+                                th:classappend="' btn-' + ${buttonColor}">
+                            <i class="fa-solid fa-magnifying-glass"></i> [[${headerText}]]
+                        </button>
+                    </div>
+
                 </div>
             </form>
         </div>
