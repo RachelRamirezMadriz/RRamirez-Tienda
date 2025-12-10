@@ -81,7 +81,7 @@
         <!-- fragmento 2 para el listado de productos -->
         <section th:fragment="listado" class="p-3">
             <div class="row p-3">
-                <div class="col-md-9">
+                <div id="producto" class="col-md-9">
                     <div class="card p-2">
                         <div class="card-header"><h4>[[#{producto.listado}]]</h4></div>
                         <div class="card-body">
@@ -95,7 +95,7 @@
                                             <th>[[#{producto.imagen}]]</th>
                                             <th>[[#{producto.categoria}]]</th>
                                             <th>[[#{producto.activo}]]</th>
-                                            <th sec:authorize="hasRole('ROLE_ADMIN')"></th>
+                                            <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -106,9 +106,9 @@
                                             <td class="text-center">[[${p.existencias}]]</td>
                                             <td class="text-end">[[${#numbers.formatCurrency(p.precio*p.existencias)}]]</td>
                                             <td><img th:src="@{${p.rutaImagen}}" alt="noData" height="75"/></td>
-                                            <td>[[${p.categoria.idCategoria}]]</td>
+                                            <td>[[${p.categoria.descripcion}]]</td>
                                             <td th:text="${p.activo} ? 'Activa':'Inactiva'"></td>
-                                            <td sec:authorize="hasRole('ROLE_ADMIN')"><div class='d-flex align-items-start'></div>
+                                            <td>
                                                 <button type="button" class="btn btn-danger"
                                                         data-bs-toggle="modal" data-bs-target="#confirmModal"
                                                         th:data-bs-id="${p.idProducto}"
